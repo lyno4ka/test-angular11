@@ -1,0 +1,123 @@
+<div class="modal-container">
+  <div class="modal-title">
+    <h3>New user</h3>
+  </div>
+
+  <div class="modal-body">
+  <form class="user-form" [formGroup]="userForm">
+
+    <div class="field-form">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input class="input-form" type="email" matInput placeholder="example@gmail.com" formControlName="email" required>
+        <mat-error *ngIf="userForm.get('email').hasError('email') && !userForm.get('email').hasError('required')
+            || userForm.get('email').hasError('pattern')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="userForm.get('email').hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="field-form">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input type="text" matInput class="input-form"  placeholder="John" formControlName="name" required>
+        <mat-error *ngIf="userForm.get('name').hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="!userForm.get('name').hasError('required') && userForm.get('name').hasError('minlength')">
+          The field must be at least {{userForm.get('name').errors.minlength.requiredLength}} characters.
+          Now it is {{userForm.get('name').errors.minlength.actualLength}} character(s)
+        </mat-error>
+        <mat-error *ngIf="!userForm.get('name').hasError('required') && userForm.get('name').hasError('maxlength')">
+          The field must be no more than {{userForm.get('name').errors.maxlength.requiredLength}} characters.
+          Now it is {{userForm.get('name').errors.maxlength.actualLength}} characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="field-form">
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput type="number" class="input-form"  formControlName="age" placeholder="18" required>
+        <mat-error *ngIf="userForm.get('age').hasError('required')">
+          Age is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="userForm.get('age').hasError('min') || userForm.get('age').hasError('max')
+            && !userForm.get('age').hasError('required')">
+          The minimum age is 10 years, the maximum is 100
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="field-form">
+      <mat-form-field>
+        <mat-label>Balance</mat-label>
+        <input matInput type="number" class="input-form"  formControlName="balance">
+      </mat-form-field>
+    </div>
+    <div class="field-form">
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <textarea matInput placeholder="Ex. 100 Main St" formControlName="address"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="field-form">
+      <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input type="number" matInput placeholder="555-555-1234" formControlName="phone">
+      </mat-form-field>
+    </div>
+    <div class="field-form">
+      <mat-form-field>
+        <mat-label>About</mat-label>
+        <textarea matInput placeholder="Ex. I am John..." formControlName="about"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="field-form">
+      <mat-form-field>
+        <mat-label>Registered</mat-label>
+        <input type="datetime" matInput class="input-form" placeholder="John" formControlName="registered" readonly
+               [value]="userForm.value.registered">
+      </mat-form-field>
+    </div>
+    <div class="field-form field-form-download">
+      <input type="file" class="input-form" id="picture" name="files[]" multiple="" required
+             accept="image/*"  formControlName="picture" (change)="onSelectPhoto($event)">
+      <label for="picture" class="w-100"><span class="download-input">Download</span></label>
+      <mat-error *ngIf="userForm.get('picture').hasError('required')">
+        Picture is <strong>required</strong>
+      </mat-error>
+    </div>
+    <div class="field-form">
+      <mat-form-field class="wrapper">
+        <mat-chip-list #chipList aria-label="tags">
+          <mat-chip *ngFor="let tag of tags.value; index as i" [selectable]="selectable"
+                    [removable]="removable" (removed)="removeTag(i)" class="chip">
+            {{tag}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input class="chip-input" type="text" matInput placeholder="Tag" formArrayName="tags" required
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="addTag($event)">
+          <mat-error *ngIf="tags.hasError('required')">
+            Tags is <strong>required</strong> and min two tags
+          </mat-error>
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-btn" (click)="cancel()">
+        Cancel
+      </button>
+      <button id="btn-form" type="submit" class="modal-btn" (click)="addUser()"
+              [disabled]="userForm.invalid || tags.length < 2">
+        Save
+      </button>
+    </div>
+  </form>
+  </div>
+
+</div>
+

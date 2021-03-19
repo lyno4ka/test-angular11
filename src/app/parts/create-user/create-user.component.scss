@@ -1,0 +1,30 @@
+.user-form {
+  margin: 1.5rem;
+}
+
+.chip {
+  background-image: linear-gradient(to top, #ff606f 0%, #ff55be 100%);
+  min-width: 70px;
+  color: #ffffff;
+  text-align: center;
+}
+
+input[type='file'] {
+  display: none;
+  padding: 0.3rem;
+}
+
+.download-input {
+  padding: 10px 20px;
+  background-image: linear-gradient(to top, #ff606f 0%, #ff55be 100%);
+  box-shadow: 0px 20px 20px -5px rgba(255, 40, 159, 0.3);
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  color: var(--light-color);
+  cursor: pointer;
+}
+
+.field-form-download {
+  margin-bottom: 1rem;
+}

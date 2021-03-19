@@ -1,0 +1,18 @@
+<div class="modal-container">
+  <div class="modal-title">
+    <h3>{{user.name}}</h3>
+  </div>
+  <div class="modal-body">
+    <div class="modal-text">
+      <p>Are you sure you want to delete {{user.name}}?</p>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-btn" (click)="cancel()">
+        Cancel
+      </button>
+      <button class="modal-btn" (click)="handleDeleteUser(user)">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

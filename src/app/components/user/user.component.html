@@ -1,0 +1,29 @@
+<div class="user-container">
+
+  <div class="user-info" *ngIf="(user$ | async) as user">
+
+    <div class="user-card">
+      <div class="field">
+        <img class="user-img" [src]="user.picture" alt="">
+      </div>
+      <div class="field"> <span class="name-field">name: </span> <span>{{user.name}}</span></div>
+      <div class="field"> <span class="name-field">age: </span> <span>{{ user.age}}</span></div>
+      <div class="field"> <span class="name-field">balance: </span> <span>{{ user.balance ? user.balance : '-'}}</span></div>
+      <div class="field"> <span class="name-field">email: </span> <span>{{user.email}}</span></div>
+      <div class="field"> <span class="name-field">phone: </span> <span>{{user.phone ? user.phone : '-'}}</span></div>
+      <div class="field"> <span class="name-field">address: </span> <span>{{user.address ? user.address : '-'}}</span></div>
+      <div class="field"> <span class="name-field">registered: </span> <span>{{user.registered | date : 'MM-dd-YYYY HH:mm'}}</span></div>
+      <div class="field"> <span class="name-field">about: </span> <span>{{user.about ? user.about : '-'}}</span></div>
+      <div class="field">
+        <p class="text-bold"> Tags </p>
+        <ul>
+          <li *ngFor="let tag of user.tags">
+            <span class="tag">{{tag}}</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
